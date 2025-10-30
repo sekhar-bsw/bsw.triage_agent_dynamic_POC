@@ -1,0 +1,66 @@
+{
+  "spec_id": "BH_ROUTING_LIKEMIND_V1",
+  "version": "1.0.0",
+  "intent": "BEHAVIORAL_HEALTH_ROUTING",
+  "business_goal": "Route user to Likemind, BH Assisted, or BH Self-Service",
+  "traits": [
+    {
+      "trait_target_key": "bh_has_active_likemind_care_plan",
+      "question_text": "Are you currently enrolled in a Likemind care plan?",
+      "answer_type": "yes_no"
+    },
+    {
+      "trait_target_key": "bh_needs_assisted_support",
+      "question_text": "Would you prefer to speak with a behavioral health specialist?",
+      "answer_type": "yes_no"
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "LIKEMIND_DASHBOARD_CONNECT",
+      "label": "Likemind Dashboard",
+      "description": "User is enrolled in Likemind",
+      "immediate_select_if": [
+        {
+          "trait_target_key": "bh_has_active_likemind_care_plan",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "decision_rules": [],
+      "resolution_text": "Access your Likemind dashboard",
+      "resolution_button_label": "Go to Dashboard",
+      "resolution_button_url": "https://likemind.example.com/dashboard",
+      "analytics_resolution_code": "LM_CONNECT"
+    },
+    {
+      "outcome_id": "BH_ASSISTED_SUPPORT",
+      "label": "Assisted Support",
+      "description": "User prefers assisted support",
+      "immediate_select_if": [],
+      "decision_rules": [
+        {
+          "trait_target_key": "bh_needs_assisted_support",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "resolution_text": "Connect with a behavioral health specialist",
+      "resolution_button_label": "Get Support",
+      "resolution_button_url": "https://bh.example.com/support",
+      "analytics_resolution_code": "BH_ASSIST"
+    },
+    {
+      "outcome_id": "BH_SELF_SERVICE",
+      "label": "Self-Service",
+      "description": "Default outcome for self-service",
+      "immediate_select_if": [],
+      "decision_rules": [],
+      "resolution_text": "Explore self-service behavioral health resources",
+      "resolution_button_label": "Explore Resources",
+      "resolution_button_url": "https://bh.example.com/resources",
+      "analytics_resolution_code": "BH_SELF"
+    }
+  ],
+  "safety_preamble": "You are assisting with behavioral health navigation. Ask only one question at a time. Do not diagnose. Be calm and supportive."
+}
