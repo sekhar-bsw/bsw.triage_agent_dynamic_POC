@@ -26,4 +26,4 @@ This endpoint automatically loads the spec from the `configs/` folder using the 
 }
 ```
 
-You no longer need to send the full spec in the request body.
+
