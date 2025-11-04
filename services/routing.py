@@ -62,9 +62,9 @@ def simulate_routing(spec: DecisionSpec, data: Dict) -> Optional[Dict]:
     for outcome in spec.outcomes:
         if all(evaluate_rule(rule, data) for rule in outcome.immediate_select_if):
             ai_response = query_azure_ai(outcome.description)
-            return {"outcome": outcome.outcome_id, "rationale": outcome.description, "ai_response": ai_response}
+            return {"outcome": outcome.outcome_id, "rationale": outcome.description,"resolution_button_label":outcome.resolution_button_label,"resolution_button_url":outcome.resolution_button_url, "ai_response": ai_response}
     for outcome in spec.outcomes:
         if all(evaluate_rule(rule, data) for rule in outcome.decision_rules):
             ai_response = query_azure_ai(outcome.description)
-            return {"outcome": outcome.outcome_id, "rationale": outcome.description, "ai_response": ai_response}
+            return {"outcome": outcome.outcome_id, "rationale": outcome.description,"resolution_button_label":outcome.resolution_button_label,"resolution_button_url":outcome.resolution_button_url, "ai_response": ai_response}
     return None
